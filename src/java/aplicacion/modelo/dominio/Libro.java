@@ -5,31 +5,36 @@
  */
 package aplicacion.modelo.dominio;
 
-import java.util.Calendar;
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-public class Libro {
+public class Libro implements Serializable{
     private int codigo;
     private int isbn;
     private String titulo;
     private int cantPaginas;
-    private String autores;
+    //private String autores;
+    private List<Autor> autores;
     private String tematica;
-    private Calendar fechaEdicion;
+    private Date fechaEdicion;
 
     public Libro() {
+        autores = new ArrayList<Autor>();
     }
 
-    public Libro(int codigo, int isbn, String titulo, int cantPaginas, String autores, String tematica, Calendar fechaEdicion) {
+    public Libro(int codigo, int isbn, String titulo, int cantPaginas, String tematica, Date fechaEdicion) {
         this.codigo = codigo;
         this.isbn = isbn;
         this.titulo = titulo;
         this.cantPaginas = cantPaginas;
-        this.autores = autores;
         this.tematica = tematica;
         this.fechaEdicion = fechaEdicion;
+        autores = new ArrayList<Autor>();
     }
-
-    
 
     public void mostrarLibro(){
         System.out.println("Codigo: "+this.codigo);
@@ -38,6 +43,32 @@ public class Libro {
 //        System.out.println("Cant Paginas: "+this.cantPaginas);
 //        System.out.println("Autores: "+this.autores);
     }
+    /**
+     * Formatea la fecha de edicion al formato "yyyy-mm-dd"
+     * @return devuelve la fecha de edicion en formato string "yyyy-mm-dd"
+     */
+    public String obtenerFechaFormateada(){
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(this.fechaEdicion.getTime());
+    }
+    
+    /**
+     * Convierte la lista de autores en una cadena
+     * @return cadena que contiene todos los autores
+     */
+    public String obtenerAutoresFormateados(){
+        String aux = "";
+        for(Autor a: autores){
+            aux = aux + a.toString()+ "; ";
+        }
+        return aux.substring(0, aux.length() - 2);
+        //return aux;
+    }
+    
+    public void agregarAutor(Autor autor){
+        autores.add(new Autor(autor.getId(), autor.getNombre(), autor.getApellido()));
+    }
+    
     /**
      * @return the codigo
      */
@@ -97,14 +128,14 @@ public class Libro {
     /**
      * @return the autores
      */
-    public String getAutores() {
+    public List<Autor> getAutores() {
         return autores;
     }
 
     /**
      * @param autores the autores to set
      */
-    public void setAutores(String autores) {
+    public void setAutores(List<Autor> autores) {
         this.autores = autores;
     }
 
@@ -125,14 +156,14 @@ public class Libro {
     /**
      * @return the fechaEdicion
      */
-    public Calendar getFechaEdicion() {
+    public Date getFechaEdicion() {
         return fechaEdicion;
     }
 
     /**
      * @param fechaEdicion the fechaEdicion to set
      */
-    public void setFechaEdicion(Calendar fechaEdicion) {
+    public void setFechaEdicion(Date fechaEdicion) {
         this.fechaEdicion = fechaEdicion;
     }
 

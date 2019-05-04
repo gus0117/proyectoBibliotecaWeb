@@ -5,10 +5,13 @@
  */
 package aplicacion.modelo.util;
 
+import aplicacion.modelo.dominio.Autor;
 import aplicacion.modelo.dominio.Libro;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,8 +21,21 @@ import java.util.List;
 public class ListaLibros {
     private List<Libro> listaLibros;
 
+    /**
+     * Constructor que inicializa la lista y carga un Libro
+     */
     public ListaLibros() {
         listaLibros = new ArrayList<Libro>();
+        
+        //TEST
+        Calendar fecha = Calendar.getInstance();
+        fecha.set(1980, 5, 13);
+        Date fecha1 = fecha.getTime();
+
+        Libro libro1 = new Libro(10, 1, "Cosmos", 200, "Ciencia", fecha1);
+        Autor a1 = new Autor(1, "Carl", "Sagan");
+        libro1.agregarAutor(a1);
+        listaLibros.add(libro1);
     }
 
     /**
@@ -39,6 +55,8 @@ public class ListaLibros {
         auxLibro.setCodigo(libro.getCodigo());
         auxLibro.setIsbn(libro.getIsbn());
         auxLibro.setTitulo(libro.getTitulo());
+        auxLibro.setFechaEdicion(libro.getFechaEdicion());
+        auxLibro.setTematica(libro.getTematica());
         listaLibros.add(auxLibro);
     }
     /**
@@ -82,7 +100,7 @@ public class ListaLibros {
     /**
      * Modifica un elemento libro de la lista. Este metodo requiere que el codigo
      * del libro no se modifique, debido a que solicita una busqueda por codigo.
-//     * @param libro libro a reemplazar (excepto el atributo codigo)
+     * @param libro libro a reemplazar (excepto el atributo codigo)
      */
     public void modificarLibro(Libro libro){
         int indice = this.obtenerIndiceLibroPorCodigo(libro);

@@ -6,6 +6,7 @@
 package aplicacion.dao;
 
 import aplicacion.modelo.dominio.Libro;
+import java.util.List;
 
 /**
  *
@@ -18,4 +19,5 @@ public interface ILibroDao {
     public void mostrarLista();
     public void ordenarListaLibros(boolean ascendente);
     public void mostrarListaSegunNombre(char letra);
+    public List<Libro> obtenerListaLibros();
 }

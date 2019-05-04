@@ -9,6 +9,7 @@ import aplicacion.dao.ILibroDao;
 import aplicacion.modelo.dominio.Libro;
 import aplicacion.modelo.util.ListaLibros;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -47,5 +48,10 @@ public class LibroDaoImp implements Serializable, ILibroDao {
     @Override
     public void mostrarListaSegunNombre(char letra){
         listaLibros.mostrarListaSegunNombre(letra);
+    }
+
+    @Override
+    public List<Libro> obtenerListaLibros() {
+        return listaLibros.getListaLibros();
     }
 }
