@@ -8,25 +8,39 @@
     </h:head>
     <h:body>
         <p:panel header="ALTA DE LIBROS">
-            <p:panelGrid columns="2">
-                
-                 <!-- CAMPOS PARA INGRESAR Y GUARDAR LOS DATOS-->
-                <p:outputLabel id="lblIsbm" value="Isbm :"/>
-                <p:inputText id="txtIsbm" value="#{aMBLibrosFormBean.unLibro.isbm}"/>
-                
-                <p:outputLabel id="lblNombre" value="Nombre :"/>
-                <p:inputText id="txtNombre" value="#{aMBLibrosFormBean.unLibro.nombre}"/>
-                
-                <p:outputLabel id="lblPaginas" value="Cant. Paginas :"/>
-                <p:inputNumber id="txtPaginas" value="#{aMBLibrosFormBean.unLibro.paginas}"/>
-                   
-                <p:commandButton id="btnAgregarLibro" value="Agregar"
-                                  update="tablaLibros"/>
-                    
+            <p:panelGrid columns="1">
+                      <p:commandButton id="btnAgregarLibro" value="Agregar Nuevo Libro"
+                      onclick="PF('NuevoLibro').show();"/>
+                <p:dialog id="dlgNuevoLibro"
+                          widgetVar="NuevoLibro"
+                          modal="true"
+                          header="Formulario para Registrar un Nuevo Libro">
+                    <h:form id="frmNuevoLibro">
+                        <p:panelGrid id="pnlNuevoAutor" columns="2">
+                            
+                                <p:outputLabel id="lblIsbm" value="Isbm :"/>
+                                <p:inputText id="txtIsbm" value="#{aMBLibrosFormBean.unLibro.isbm}"/>
+
+                                <p:outputLabel id="lblNombre" value="Nombre :"/>
+                                <p:inputText id="txtNombre" value="#{aMBLibrosFormBean.unLibro.nombre}"/>
+
+                                <p:outputLabel id="lblPaginas" value="Cant. Paginas :"/>
+                                <p:inputNumber id="txtPaginas" value="#{aMBLibrosFormBean.unLibro.paginas}"/>
+                                
+                                <p:commandButton id="btnRegistrarNuevoLibro" 
+                                                 value="Registrar Libro"
+                                                 actionListener="#{aMBLibrosFormBean.guardarNuevoLibro()}"
+                                                 update="frmListaLibros"
+                                                 onclick="PF('NuevoLibro')hide();"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+                      
+                      
             </p:panelGrid>
             
-            <h:form id="frmListaLisbros">
-                <!-- TABLA QUE MUESTRA LOS DATOS DE LA LISTA -->
+            <h:form id="frmListaLibros">
+               
                 <p:dataTable id="tablaLibros"
                              emptyMessage="Sin Registros"
                              value="#{aMBLibrosFormBean.libroBean.obtenerLibro()}"

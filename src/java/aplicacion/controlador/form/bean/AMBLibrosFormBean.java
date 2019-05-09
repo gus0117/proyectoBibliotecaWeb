@@ -10,6 +10,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -36,9 +37,20 @@ private List<Libro> libros;
          unLibro = new Libro();
     }
     
-    public void geberarLibro(){
+    public void generarLibro(){
         libros = libroBean.obtenerLibro();
     }
+    
+    public void guardarNuevoLibro(){
+    libroBean.agregarLibro(unLibro);
+    
+    generarLibro();
+    
+    // OCULTAR VENTANA no funciona 
+   // PrimeFaces.current().executeScript("PF('NuevoLibro')hide();");
+    }
+    
+    
     
     //Getter & Setter
 
