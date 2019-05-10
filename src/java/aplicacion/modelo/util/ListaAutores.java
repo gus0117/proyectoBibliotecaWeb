@@ -17,6 +17,8 @@ import java.util.List;
 public class ListaAutores implements Serializable{
     
     private List<Autor> autores;
+    
+    
 
     public ListaAutores() {
         
@@ -38,11 +40,35 @@ public class ListaAutores implements Serializable{
     
     public void modificarAutor(Autor unAutor){
         
-        for(int i=0; i<autores.size(); i++){
-            if ( autores.get(i).getId()== (unAutor.getId())) {
+        for(int i=0; i<getAutores().size(); i++){
+            if ( getAutores().get(i).getId()== (unAutor.getId())) {
             
-                    autores.set(i, unAutor);
+                    getAutores().set(i, unAutor);
             }
         }
+    }
+    
+    public void eliminarAutor (Autor unAutor){
+    
+        for(int i=0; i<getAutores().size(); i++){
+            if ( getAutores().get(i).getId()==(unAutor.getId())) {
+                   getAutores().remove(i);
+            }
+        }    
+    
+    }
+
+    /**
+     * @return the autores
+     */
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    /**
+     * @param autores the autores to set
+     */
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
     }
 }
