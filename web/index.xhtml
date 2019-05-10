@@ -31,7 +31,7 @@
                                                  value="Registrar Libro"
                                                  actionListener="#{aMBLibrosFormBean.guardarNuevoLibro()}"
                                                  update="frmListaLibros"
-                                                 onclick="PF('NuevoLibro')hide();"/>
+                                                 oncomplete="PF('NuevoLibro').hide()"/>
                         </p:panelGrid>
                     </h:form>
                 </p:dialog>

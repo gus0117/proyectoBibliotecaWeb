@@ -47,7 +47,7 @@ private List<Libro> libros;
     generarLibro();
     
     // OCULTAR VENTANA no funciona 
-   // PrimeFaces.current().executeScript("PF('NuevoLibro')hide();");
+    //PrimeFaces.current().executeScript("PF('NuevoLibro')hide();");
     }
     
     
