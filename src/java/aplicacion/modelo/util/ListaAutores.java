@@ -16,28 +16,45 @@ import java.util.List;
  */
 public class ListaAutores implements Serializable{
     
+    /**
+     * Lista de autores (data source)                                                          
+     */
     private List<Autor> autores;
     
     
-
+    /**
+     * Constructor por defecto
+     */
     public ListaAutores() {
-        
+        //Se inicializan las referencias
         autores = new ArrayList<>();
     }
 
+    /**
+     * Constructor con argumentos
+     * @param autores lista de autores
+     */
     public ListaAutores(List<Autor> autores) {
         this.autores = autores;
     }
     
+    /**
+     * Agrega un autor al data source
+     * @param unAutor nuevo autor
+     */
     public void agregarAutor(Autor unAutor){
         Autor autoraux = new Autor();
         
         autoraux.setId(unAutor.getId());
         autoraux.setNombre(unAutor.getNombre());
         autoraux.setApellido(unAutor.getApellido());
-        autoraux.setDate(unAutor.getDate());
+        autores.add(autoraux);
     }
     
+    /**
+     * Modifica un autor del data source
+     * @param unAutor autor a modificar
+     */
     public void modificarAutor(Autor unAutor){
         
         for(int i=0; i<getAutores().size(); i++){
@@ -48,6 +65,10 @@ public class ListaAutores implements Serializable{
         }
     }
     
+    /**
+     * Elimina un autor del data source
+     * @param unAutor autor a eliminar
+     */
     public void eliminarAutor (Autor unAutor){
     
         for(int i=0; i<getAutores().size(); i++){

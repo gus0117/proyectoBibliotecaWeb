@@ -6,7 +6,6 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
@@ -17,16 +16,14 @@ public class Autor implements Serializable{
     private int id;
     private String nombre;
     private String apellido;
-    private Date date;
 
     public Autor() {
     }
 
-    public Autor(int id, String nombre, String apellido, Date date) {
+    public Autor(int id, String nombre, String apellido) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.date = date;
     }
 
     /**
@@ -70,21 +67,5 @@ public class Autor implements Serializable{
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
-    /**
-     * @return the date
-     */
-    public Date getDate() {
-        return date;
-    }
-
-    /**
-     * @param date the date to set
-     */
-    public void setDate(Date date) {
-        this.date = date;
-    }
-    
-    
     
 }

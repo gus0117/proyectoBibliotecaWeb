@@ -48,7 +48,7 @@ public class ABMEditorialFormsBean implements Serializable{
      */
     public void agregarEditorial(){
         editorialBean.agregaEditorial(editorial);
-        mostrarMensajeGrowl("Guardado","Se ha GUARDADO la editorial");
+        //mostrarMensajeGrowl("Guardado","Se ha GUARDADO la editorial");
     }
     
     /**
