@@ -20,11 +20,16 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class AutorBean {
 
-    
+    /**
+     * Referencia a la logica de negocio
+     */
     private IAutorDao  autordao;
     
+    /**
+     * Constructor
+     */
     public AutorBean() {
-        
+        //Se inicializan las referencias
         autordao = new AutorDAOImp();
     }
 
@@ -42,17 +47,35 @@ public class AutorBean {
         this.autordao = autordao;
     }
     
+    /**
+     * Agrega un nuevo autor
+     * @param unAutor nuevo autor
+     */
     public void agregarAutor(Autor unAutor){
         autordao.crear(unAutor);
     }
+    
+    /**
+     * Modifica un autor
+     * @param unAutor autor modificado
+     */
     public void modificarAutor(Autor unAutor){
         autordao.modificar(unAutor);
     }
+    
+    /**
+     * Elimina un autor
+     * @param unAutor autor a eliminar
+     */
     public void eliminarAutor(Autor unAutor){
         autordao.eliminar(unAutor);
     }
     
-    public List<Autor> obtenerAutor(){
+    /**
+     * Obtiene una lista de autores
+     * @return Lista de autores
+     */
+    public List<Autor> obtenerAutores(){
        return autordao.obtener();
     }
 }
