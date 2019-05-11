@@ -6,6 +6,7 @@
 package aplicacion.controlador.beans.forms;
 
 import aplicacion.controlador.beans.EditorialBean;
+import aplicacion.modelo.dominio.Autor;
 import aplicacion.modelo.dominio.Editorial;
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -83,6 +85,23 @@ public class ABMEditorialFormsBean implements Serializable{
         editorial = new Editorial();
     }
     
+    /**
+     * Metodo para edicion de autor
+     * @param event 
+     */
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Editorial Editada");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    /**
+     * Metodo para cancelar edicion de autor
+     * @param event 
+     */
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
     //GETTERS Y SETTERS
 
     public EditorialBean getEditorialBean() {

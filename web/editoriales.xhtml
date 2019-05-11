@@ -12,14 +12,26 @@
             <h:form id="frmEditoriales">
                 <p:growl id="growl" sticky="true" showDetail="true"></p:growl>
                 <p:commandButton id="btnNuevaEditorial" value="Nueva Editorial" oncomplete="PF('altaEditorial').show()"></p:commandButton>
-                <p:dataTable id="tblEditoriales" emptyMessage="Sin Registros" value="#{aBMEditorialFormsBean.obtenerEditoriales()}" var="edit">
+                <p:dataTable id="tblEditoriales" emptyMessage="Sin Registros" value="#{aBMEditorialFormsBean.obtenerEditoriales()}" var="edit" editable="true">
+                    <f:facet name="header">Gestion de Editoriales</f:facet>
+                    <p:ajax event="rowEdit" listener="#{aBMEditorialFormsBean.onRowEdit(event)}" update=":frmEditoriales:growl" />
+                    <p:ajax event="rowEditCancel" listener="#{aBMEditorialFormsBean.onRowCancel(event)}" update=":frmEditoriales:growl" />
+                    
                     <p:column headerText="Codigo">
                         <p:outputLabel id="lblCodigo" value="#{edit.codigo}"></p:outputLabel>
                     </p:column>
                     <p:column headerText="Nombre">
-                        <p:outputLabel id="lblNombre" value="#{edit.nombre}"></p:outputLabel>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputLabel id="lblNombre" value="#{edit.nombre}"></h:outputLabel>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText id="txtNombre" value="#{edit.nombre}" style="width: 100%" required="true" requiredMessage="Ingresar nombre editorial"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
                     <p:column headerText="Acciones">
+                        <p:rowEditor/>
                         <p:commandButton id="btnBorrarEditorial" icon="ui-icon-trash" action="#{aBMEditorialFormsBean.borrarEditorial(edit)}" update=":frmEditoriales frmEditoriales:growl"></p:commandButton>
                     </p:column>
                 </p:dataTable>
