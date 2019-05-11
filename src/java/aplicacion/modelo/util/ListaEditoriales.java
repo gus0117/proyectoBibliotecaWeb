@@ -44,7 +44,7 @@ public class ListaEditoriales implements Serializable{
      * @param edit editorial a eliminar
      */
     public void borrarEditorial(Editorial edit){
-        editoriales.removeIf(e -> e.getCodigo().compareTo(edit.getCodigo()) == 0);
+        editoriales.removeIf(e -> e.getCodigo() == edit.getCodigo());
     }
     
     /**
@@ -53,9 +53,9 @@ public class ListaEditoriales implements Serializable{
      * @return devuelve una editorial con el mismo codigo. Si no se encuentra
      * devuelve null.
      */
-    public Editorial obtenerEditorial(Integer codigo){
+    public Editorial obtenerEditorial(int codigo){
         for(Editorial e : editoriales){
-            if(e.getCodigo().compareTo(codigo) == 0){
+            if(e.getCodigo() == codigo){
                 return e;
             }
         }

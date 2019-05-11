@@ -12,7 +12,7 @@ public class Editorial implements Serializable{
     /**
      * Codigo de la editorial
      */
-    private Integer codigo;
+    private int codigo;
     /**
      * Nombre de la editorial
      */
@@ -29,18 +29,18 @@ public class Editorial implements Serializable{
      * @param codigo codigo de editorial
      * @param nombre nombre de la editorial
      */
-    public Editorial(Integer codigo, String nombre) {
+    public Editorial(int codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
     }
 
     //Metodos accesores
     
-    public Integer getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 

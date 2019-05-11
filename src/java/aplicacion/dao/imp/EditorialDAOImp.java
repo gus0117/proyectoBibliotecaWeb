@@ -54,7 +54,7 @@ public class EditorialDAOImp implements Serializable, IEditorialDAO{
      * @return devuelve una editorial con el mismo codigo
      */
     @Override
-    public Editorial obtenerEditorial(Integer codigo) {
+    public Editorial obtenerEditorial(int codigo) {
         return editoriales.obtenerEditorial(codigo);
     }
 

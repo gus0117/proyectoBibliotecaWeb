@@ -15,6 +15,6 @@ import java.util.List;
 public interface IEditorialDAO {
     public void agregarEditorial(Editorial editorial);
     public void borrarEditorial(Editorial editorial);
-    public Editorial obtenerEditorial(Integer codigo);
+    public Editorial obtenerEditorial(int codigo);
     public List<Editorial> obtenerEditoriales();
 }

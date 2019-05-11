@@ -2,29 +2,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <p:panel header="Gestion de Editorial">
-            <h:form>
-                <p:commandButton id="btnNuevoEditorial" 
-                                 value="Nueva Editorial" 
-                                 action="" 
-                                 update=""></p:commandButton>
-                <p:dataTable id="tblEditoriales"
-                             emptyMessage="Sin Registros"
-                             value="" var="">
+            <h:form id="frmEditoriales">
+                <p:growl id="growl" sticky="true" showDetail="true"></p:growl>
+                <p:commandButton id="btnNuevaEditorial" value="Nueva Editorial" oncomplete="PF('altaEditorial').show()"></p:commandButton>
+                <p:dataTable id="tblEditoriales" emptyMessage="Sin Registros" value="#{aBMEditorialFormsBean.obtenerEditoriales()}" var="edit">
                     <p:column headerText="Codigo">
-                        <p:outputLabel id="lblCodigo"></p:outputLabel>
+                        <p:outputLabel id="lblCodigo" value="#{edit.codigo}"></p:outputLabel>
                     </p:column>
                     <p:column headerText="Nombre">
-                        <p:outputLabel id="lblNombre"></p:outputLabel>
+                        <p:outputLabel id="lblNombre" value="#{edit.nombre}"></p:outputLabel>
+                    </p:column>
+                    <p:column headerText="Acciones">
+                        <p:commandButton id="btnBorrarEditorial" icon="ui-icon-trash" action="#{aBMEditorialFormsBean.borrarEditorial(edit)}" update=":frmEditoriales frmEditoriales:growl"></p:commandButton>
                     </p:column>
                 </p:dataTable>
             </h:form>
         </p:panel>
+        
+        <p:dialog id="dlgAltaEditorial" widgetVar="altaEditorial" modal="true" resizable="false" header="Alta Editorial">
+            <h:form id="frmAltaEditorial">
+                <p:panelGrid columns="2">
+                    <p:outputLabel id="lblNuevoCodigo" value="Codigo: "/>
+                    <p:inputNumber id="txtNuevoNumero" value="#{aBMEditorialFormsBean.editorial.codigo}" minValue="0" decimalPlaces="0" required="true" thousandSeparator="" requiredMessage="Ingrese codigo de editorial"></p:inputNumber>
+                    <p:outputLabel id="lblNuevoNombre" value="Nombre: "/>
+                    <p:inputText id="txtNuevoNombre" value="#{aBMEditorialFormsBean.editorial.nombre}" required="true" requiredMessage="Ingresar Nombre de Editorial"/>
+                    <p:commandButton id="btnGuardarEditorial" value="Guardar" oncomplete="PF('altaEditorial').hide()" update=":frmEditoriales :frmEditoriales:growl">
+                        <f:actionListener binding="#{aBMEditorialFormsBean.agregarEditorial()}"/>
+                        <f:actionListener binding="#{aBMEditorialFormsBean.iniciarEditorial()}"/>
+                    </p:commandButton>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>
 

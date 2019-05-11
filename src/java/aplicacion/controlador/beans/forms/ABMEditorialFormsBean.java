@@ -9,9 +9,11 @@ import aplicacion.controlador.beans.EditorialBean;
 import aplicacion.modelo.dominio.Editorial;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -44,13 +46,26 @@ public class ABMEditorialFormsBean implements Serializable{
      */
     public void agregarEditorial(){
         editorialBean.agregaEditorial(editorial);
+        mostrarMensajeGrowl("Guardado","Se ha GUARDADO la editorial");
     }
     
     /**
-     * Se elimina la editorial
+     * Elimina una editorial de la lista.
+     * @param e Editorial a eliminar
      */
-    public void borrarEditorial(){
-        editorialBean.borrarEditorial(editorial);
+    public void borrarEditorial(Editorial e){
+        editorialBean.borrarEditorial(e);
+        mostrarMensajeGrowl("Borrado","Se ha BORRADO la editorial");
+    }
+    
+    /**
+     * Muestra un mensaje al realizar una operacion de alta o de baja;
+     * @param summary summary del mensaje
+     * @param detalle detalle del mensaje
+     */
+    public void mostrarMensajeGrowl(String summary, String detalle){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(summary, detalle));
     }
     
     /**
