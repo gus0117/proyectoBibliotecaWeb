@@ -5,7 +5,7 @@
  */
 package aplicacion.dao.imp;
 
-import aplicacion.daoo.ILibroDao;
+import aplicacion.dao.ILibroDao;
 import aplicacion.modelo.dominio.Libro;
 import aplicacion.modelo.util.ListaLibro;
 import java.io.Serializable;

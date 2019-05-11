@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aplicacion.controlador.form.bean;
+package aplicacion.controlador.beans.forms;
 
+import aplicacion.controlador.beans.LibroBean;
 import aplicacion.modelo.dominio.Libro;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

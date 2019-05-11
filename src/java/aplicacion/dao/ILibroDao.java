@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aplicacion.daoo;
+package aplicacion.dao;
 
 import aplicacion.modelo.dominio.Libro;
 import java.util.List;

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aplicacion.controlador.form.bean;
+package aplicacion.controlador.beans;
 
 import aplicacion.dao.imp.LibroDaoImp;
-import aplicacion.daoo.ILibroDao;
+import aplicacion.dao.ILibroDao;
 import aplicacion.modelo.dominio.Libro;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
