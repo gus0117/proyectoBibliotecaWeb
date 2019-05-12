@@ -20,6 +20,9 @@ public class ListaLibro implements Serializable {
 
     public ListaLibro() {
         libros = new ArrayList<>();
+        //creo un libro por defecto 
+        Libro libro = new Libro("123","Persona Normal ",300);
+        libros.add(libro);
     }
     
     /**

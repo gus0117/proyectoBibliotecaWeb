@@ -19,9 +19,6 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class LibroBean {
-
-    //Bean Administrado
-    
     private ILibroDao libroDao;
     /**
      * Creates a new instance of LibroBean

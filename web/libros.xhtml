@@ -3,66 +3,102 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <ui:composition template="./WEB-INF/Templates/principalTemplate.xhtml">
             <ui:define name="content">
-                <p:panel header="ALTA DE LIBROS">
-                    <p:panelGrid columns="1">
-                              <p:commandButton id="btnAgregarLibro" value="Agregar Nuevo Libro"
-                              onclick="PF('NuevoLibro').show();"/>
-                        <p:dialog id="dlgNuevoLibro"
-                                  widgetVar="NuevoLibro"
-                                  modal="true"
-                                  header="Formulario para Registrar un Nuevo Libro">
-                            <h:form id="frmNuevoLibro">
-                                <p:panelGrid id="pnlNuevoAutor" columns="2">
-
-                                        <p:outputLabel id="lblIsbm" value="Isbm :"/>
-                                        <p:inputText id="txtIsbm" value="#{aMBLibrosFormBean.unLibro.isbm}"/>
-
-                                        <p:outputLabel id="lblNombre" value="Nombre :"/>
-                                        <p:inputText id="txtNombre" value="#{aMBLibrosFormBean.unLibro.nombre}"/>
-
-                                        <p:outputLabel id="lblPaginas" value="Cant. Paginas :"/>
-                                        <p:inputNumber id="txtPaginas" value="#{aMBLibrosFormBean.unLibro.paginas}"/>
-
-                                        <p:commandButton id="btnRegistrarNuevoLibro" 
-                                                         value="Registrar Libro"
-                                                         actionListener="#{aMBLibrosFormBean.guardarNuevoLibro()}"
-                                                         update="frmListaLibros"
-                                                         oncomplete="PF('NuevoLibro').hide()"/>
-                                </p:panelGrid>
-                            </h:form>
-                        </p:dialog>
-
-
-                    </p:panelGrid>
-
-                    <h:form id="frmListaLibros">
-
-                        <p:dataTable id="tablaLibros"
-                                     emptyMessage="Sin Registros"
-                                     value="#{aMBLibrosFormBean.libroBean.obtenerLibro()}"
-                                     var ="lib">
-                            <p:column headerText="Ismb">
-                                <p:outputLabel value="#{lib.isbm}"/>
-                            </p:column>
-
-                            <p:column headerText="Nombre">
+                
+                <h:form id="frmlListadoLibros">
+                    <p:growl id="mensajes"
+                             showDetail="true"/>
+                    <p:dataTable id="tblLibros"
+                                 editable="true"
+                                 value="#{aMBLibrosFormBean.libros}"
+                                 var="lib">
+                        <f:facet name="header">
+                            LISTADO DE LIBROS
+                        </f:facet>
+                        
+                        <p:ajax event="rowEdit" listener="#{aMBLibrosFormBean.onRowEdit}"
+                                update="frmlListadoLibros:mensajes"/>
+                        <p:ajax event="rowEditCancel" listener="#{aMBLibrosFormBean.onRowEditCancel}"
+                                update="frmlListadoLibros:mensajes"/>
+                        
+                        <p:column headerText="Isbm">
+                            <p:outputLabel value="#{lib.isbm}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Nobmbre">
+                          <p:cellEditor>
+                            <f:facet name="output">
                                 <p:outputLabel value="#{lib.nombre}"/>
-                            </p:column>
-
-                            <p:column headerText="Paginas">
-                                <p:outputLabel value="#{lib.paginas}"/>
-                            </p:column>
-
-                        </p:dataTable>   
-                    </h:form>   
-                </p:panel>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText id="txtTblNombre" value="#{lib.nombre}" 
+                                             required="true"/>
+                            </f:facet>
+                        </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Paginas">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:outputLabel value="#{lib.paginas}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputNumber id="numTblPaginas" value="#{lib.paginas}"
+                                           required="true"/>
+                                </f:facet>
+                            </p:cellEditor>   
+                        </p:column>    
+                        
+                        <p:column headerText="Opciones">
+                            <p:rowEditor/>
+                            <p:commandButton icon="ui-icon-trash" value="Eliminar"
+                                             actionListener="#{aMBLibrosFormBean.eliminarLibroSeleccionado(lib)}"
+                                             update="frmlListadoLibros"/>
+                        </p:column>
+                    </p:dataTable>
+                    <p/>
+                    <p:commandButton id="btlCrearNuevoLibro"
+                                     value="Crear Nuevo Libro"
+                                     oncomplete="PF('nuevoLibro').show()"
+                                     update="dlgNuevoLibro"
+                                     resetValues="true"/>
+                </h:form>
+                
+                <p:dialog id="dlgNuevoLibro"
+                          widgetVar="nuevoLibro"
+                          modal="true"
+                          header="Registro De Un Nuevo Libro">
+                    <h:form id="frmNuevoLibro">
+                        <h:panelGrid id="tblNuevoLibro" columns="2">
+                            
+                            <p:outputLabel id="lblIsbm" value="Isbm" for="txtIsbm"/>
+                            <p:inputText id="txtIsbm" value="#{aMBLibrosFormBean.unLibro.isbm}"
+                                         required="true"/>
+                            
+                            <p:outputLabel id="tblNombre" value="Nombre" for="txtNombre"/>
+                            <p:inputText id="txtNombre" value="#{aMBLibrosFormBean.unLibro.nombre}"
+                                         required="true"/>
+              
+                            <p:outputLabel id="lblPaginas" value="Paginas" for="numPaginas"/>
+                            <p:inputNumber id="numPaginas" value="#{aMBLibrosFormBean.unLibro.paginas}"
+                                           required="true"/>
+                                
+                            <p:commandButton id="btnRegistrarNuevoLibro"
+                                             value="Registar Libro"
+                                             icon="ui-icon-disk"
+                                             actionListener="#{aMBLibrosFormBean.guardarNuevoLibro()}"
+                                             update="frmlListadoLibros"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+ 
             </ui:define>
         </ui:composition>                
     </h:body>
