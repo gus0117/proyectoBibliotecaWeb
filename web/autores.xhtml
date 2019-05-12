@@ -52,7 +52,7 @@
                              var="aut"
                              editable="true"
                              >
-                    <f:facet name="header">Tabla de autores</f:facet>
+                    <f:facet name="header">LISTADO DE AUTORES</f:facet>
                     <p:ajax event="rowEdit" listener="#{aBMAutorFormBean.onRowEdit(event)}" update=":frmListaAutores:growl" />
                     <p:ajax event="rowEditCancel" listener="#{aBMAutorFormBean.onRowCancel(event)}" update=":frmListaAutores:growl" />
                     
@@ -106,12 +106,13 @@
                     </p:column>
                     
                 </p:dataTable>
-                
+                <pre></pre>
                 <p:commandButton id="btnAgregarAutor"
                                  value="Agregar nuevo Autor"
                                  oncomplete="PF('NuevoAutor').show()"
                                  action="#{aBMAutorFormBean.iniciarAutor()}"
-                                 update="dlgNuevoAutor"/>
+                                 update="dlgNuevoAutor"
+                                 icon="ui-icon-plus"/>
             </h:form>
             </ui:define>
         </ui:composition>

@@ -11,13 +11,12 @@
     <h:body>
         <ui:composition template="./WEB-INF/Templates/principalTemplate.xhtml">
             <ui:define name="content">
-                <p:panel header="Gestion de Editorial">
+                
                     <h:form id="frmEditoriales">
                         <p:growl id="growl" sticky="true" showDetail="true"></p:growl>
-                        <p:commandButton id="btnNuevaEditorial" icon="ui-icon-plus" value="Nueva Editorial" oncomplete="PF('altaEditorial').show()" action="#{aBMEditorialFormsBean.iniciarEditorial()}" update="dlgAltaEditorial"></p:commandButton>
-                        <pre></pre>
+                        
                         <p:dataTable id="tblEditoriales" emptyMessage="Sin Registros" value="#{aBMEditorialFormsBean.obtenerEditoriales()}" var="edit" editable="true">
-                            <f:facet name="header">Gestion de Editoriales</f:facet>
+                            <f:facet name="header">LISTADO DE EDITORIALES</f:facet>
                             <p:ajax event="rowEdit" listener="#{aBMEditorialFormsBean.onRowEdit(event)}" update=":frmEditoriales:growl" />
                             <p:ajax event="rowEditCancel" listener="#{aBMEditorialFormsBean.onRowCancel(event)}" update=":frmEditoriales:growl" />
 
@@ -39,8 +38,9 @@
                                 <p:commandButton id="btnBorrarEditorial" icon="ui-icon-trash" action="#{aBMEditorialFormsBean.borrarEditorial(edit)}" update=":frmEditoriales frmEditoriales:growl"></p:commandButton>
                             </p:column>
                         </p:dataTable>
+                        <pre></pre>
+                        <p:commandButton id="btnNuevaEditorial" icon="ui-icon-plus" value="Agregar Nueva Editorial" oncomplete="PF('altaEditorial').show()" action="#{aBMEditorialFormsBean.iniciarEditorial()}" update="dlgAltaEditorial"></p:commandButton>         
                     </h:form>
-                </p:panel>
 
                 <p:dialog id="dlgAltaEditorial" widgetVar="altaEditorial" modal="true" resizable="false" header="Alta Editorial">
                     <h:form id="frmAltaEditorial">

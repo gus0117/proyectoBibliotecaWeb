@@ -21,14 +21,14 @@
                     <p:growl id="messages"/>
 
                     <p:menubar id="menubarPrincipal">
-                        <p:menuitem value="Inicio" url="#" icon="ui-icon-home"/>
+                        <p:menuitem value="Inicio" url="inicio.xhtml" icon="ui-icon-home"/>
                         <p:submenu id="submenuABM" label="Biblioteca">
                             <p:menuitem value="Libros" url="libros.xhtml" icon="ui-icon-bookmark"/>
                             <p:menuitem value="Autores" url="autores.xhtml" icon="ui-icon-person"/>
                             <p:menuitem value="Editoriales" url="editoriales.xhtml" icon="ui-icon-cart"/>
                         </p:submenu>
                         <f:facet name="options">
-                            <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search"/>
+                            <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Buscar"/>
                             <p:commandButton type="button" value="Logout" icon="pi pi-home" />
                         </f:facet>
                     </p:menubar>
@@ -41,7 +41,9 @@
         </div>
 
         <div id="bottom">
-            <ui:insert name="bottom">Grupo 7 --- TRABAJO PRACTICO 4 --- PROGRAMACION VISUAL</ui:insert>
+            <ui:insert name="bottom"> 
+                <p style="text-align: center">Grupo 7 --- TRABAJO PRACTICO 4 --- PROGRAMACION VISUAL</p>
+            </ui:insert>
         </div>
 
     </h:body>
