@@ -3,12 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-               
+        <ui:composition template="./WEB-INF/Templates/principalTemplate.xhtml">
+            <ui:define name="content">      
                 <p:dialog id="dlgNuevoAutor"
                           widgetVar="NuevoAutor"
                           modal="true"
@@ -16,19 +18,23 @@
                     <h:form id="frmNuevoAutor">
                         <p:panelGrid id="pnlNuevoAutor" columns="2">
                             <p:outputLabel id="lblId" value="Id :"/>
-                            <p:inputNumber id="txtId" value="#{aBMAutorFormBean.autor.id}"/>
+                            <p:inputNumber id="txtId" value="#{aBMAutorFormBean.autor.id}" required="true" requiredMessage="Ingrese id" minValue="1" decimalPlaces="0" thousandSeparator=""/>
                             
                             <p:outputLabel id="lblnombre" value="Nombre :"/>
-                            <p:inputText id="txtNombre" value="#{aBMAutorFormBean.autor.nombre}"/>
+                            <p:inputText id="txtNombre" value="#{aBMAutorFormBean.autor.nombre}" required="true" requiredMessage="Ingrese Nombre">
+                                <f:validateLength minimum="1" maximum="50"/>
+                            </p:inputText>
                             
                             <p:outputLabel id="lblapellido" value="Apellido: "/>
-                            <p:inputText id="txtApellido" value="#{aBMAutorFormBean.autor.apellido}"/>
+                            <p:inputText id="txtApellido" value="#{aBMAutorFormBean.autor.apellido}" required="true" requiredMessage="Ingrese Apellido">
+                                <f:validateLength minimum="1" maximum="50"/>
+                            </p:inputText>
                             
                             <p:commandButton id="btnRegistrarNuevoAutor"
                                              value="Registrar nuevo Autor"
                                              update="frmListaAutores frmListaAutores:growl"
-                                             oncomplete="PF('NuevoAutor').hide()">
-                                <f:actionListener binding="#{aBMAutorFormBean.agregarAutor()}"></f:actionListener>
+                                             oncomplete="PF('NuevoAutor').hide()"
+                                             action="#{aBMAutorFormBean.agregarAutor()}">
                             </p:commandButton>
                         </p:panelGrid>
                     </h:form>
@@ -39,20 +45,45 @@
                 <p:dataTable id="tablaAutores"
                              emptyMessage="Sin Registros"
                              value="#{aBMAutorFormBean.obtenerAutores()}"
-                             var="aut">
+                             var="aut"
+                             editable="true"
+                             >
+                    <f:facet name="header">Tabla de autores</f:facet>
+                    <p:ajax event="rowEdit" listener="#{aBMAutorFormBean.onRowEdit(event)}" update=":frmListaAutores:growl" />
+                    <p:ajax event="rowEditCancel" listener="#{aBMAutorFormBean.onRowCancel(event)}" update=":frmListaAutores:growl" />
+                    
                     <p:column headerText="Id">
                         <p:outputLabel value="#{aut.id}"/>
                     </p:column>
                     
                     <p:column headerText="Nombre">
-                        <p:outputLabel value="#{aut.nombre}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <p:outputLabel value="#{aut.nombre}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText id="txtNombreEdit" value="#{aut.nombre}" required="true" requiredMessage="Ingrese Nombre">
+                                    <f:validateLength minimum="1" maximum="50"/>
+                                </p:inputText>                                
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
                     
                     <p:column headerText="Apellido">
-                        <p:outputLabel value="#{aut.apellido}"/>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <p:outputLabel value="#{aut.apellido}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText id="txtApellidoEdit" value="#{aut.apellido}" required="true" requiredMessage="Ingrese Nombre">
+                                    <f:validateLength minimum="1" maximum="50"/>
+                                </p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
                     
                     <p:column headerText="Acciones">
+                        <p:rowEditor/>
                         <p:commandButton id="btnBorrarAutor" icon="ui-icon-trash" action="#{aBMAutorFormBean.borrarAutor(aut)}" update=":frmListaAutores :frmListaAutores:growl"></p:commandButton>
                     </p:column>
                     
@@ -61,9 +92,11 @@
                 <p:commandButton id="btnAgregarAutor"
                                  value="Agregar nuevo Autor"
                                  oncomplete="PF('NuevoAutor').show()"
-                                 action="#{aBMAutorFormBean.iniciarAutor()}"/>
+                                 action="#{aBMAutorFormBean.iniciarAutor()}"
+                                 update="dlgNuevoAutor"/>
             </h:form>
-
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

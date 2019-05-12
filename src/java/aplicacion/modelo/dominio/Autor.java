@@ -13,13 +13,31 @@ import java.io.Serializable;
  */
 public class Autor implements Serializable{
     
+    /**
+     * Id del autor
+     */
     private int id;
+    /**
+     * Nombre del autor
+     */
     private String nombre;
+    /**
+     * Apellido del autor
+     */
     private String apellido;
 
+    /**
+     * Constructor por defecto
+     */
     public Autor() {
     }
 
+    /**
+     * Constructor con argumentos
+     * @param id id del autor
+     * @param nombre nombre del autor
+     * @param apellido apellido del autor
+     */
     public Autor(int id, String nombre, String apellido) {
         this.id = id;
         this.nombre = nombre;

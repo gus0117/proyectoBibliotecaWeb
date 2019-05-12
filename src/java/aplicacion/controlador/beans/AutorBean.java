@@ -10,14 +10,14 @@ import aplicacion.dao.imp.AutorDAOImp;
 import aplicacion.modelo.dominio.Autor;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author tom-4
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class AutorBean {
 
     /**

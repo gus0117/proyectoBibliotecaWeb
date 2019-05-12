@@ -46,9 +46,11 @@
                     <h:form id="frmAltaEditorial">
                         <p:panelGrid columns="2">
                             <p:outputLabel id="lblNuevoCodigo" value="Codigo: "/>
-                            <p:inputNumber id="txtNuevoNumero" value="#{aBMEditorialFormsBean.editorial.codigo}" minValue="0" decimalPlaces="0" required="true" thousandSeparator="" requiredMessage="Ingrese codigo de editorial"></p:inputNumber>
+                            <p:inputNumber id="txtNuevoNumero" value="#{aBMEditorialFormsBean.editorial.codigo}" minValue="1" decimalPlaces="0" required="true" thousandSeparator="" requiredMessage="Ingrese codigo de editorial"></p:inputNumber>
                             <p:outputLabel id="lblNuevoNombre" value="Nombre: "/>
-                            <p:inputText id="txtNuevoNombre" value="#{aBMEditorialFormsBean.editorial.nombre}" required="true" requiredMessage="Ingresar Nombre de Editorial"/>
+                            <p:inputText id="txtNuevoNombre" value="#{aBMEditorialFormsBean.editorial.nombre}" required="true" requiredMessage="Ingresar Nombre de Editorial">
+                                <f:validateLength minimum="1" maximum="50"/>
+                            </p:inputText>
                             <p:commandButton id="btnGuardarEditorial" value="Guardar" oncomplete="PF('altaEditorial').hide()" update=":frmEditoriales :frmEditoriales:growl">
                                 <f:actionListener binding="#{aBMEditorialFormsBean.agregarEditorial()}"/>
                                 <f:actionListener binding="#{aBMEditorialFormsBean.iniciarEditorial()}"/>

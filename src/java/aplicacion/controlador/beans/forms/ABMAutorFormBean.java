@@ -13,14 +13,16 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
  * @author Rocio
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ABMAutorFormBean implements Serializable{
 
     /**
@@ -68,7 +70,6 @@ public class ABMAutorFormBean implements Serializable{
      */
     public void iniciarAutor(){
         this.autor = new Autor();
-        System.out.println("Autor iniciado" + this.autor.toString());
     }
     
     /**
@@ -76,8 +77,25 @@ public class ABMAutorFormBean implements Serializable{
      * @return retorna una lista de autores
      */
     public List<Autor> obtenerAutores(){
-        System.out.println("cantidad autores " + autorBean.obtenerAutores().size());
         return autorBean.obtenerAutores();
+    }
+
+    /**
+     * Metodo para edicion de autor
+     * @param event 
+     */
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Autor Editado");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    /**
+     * Metodo para cancelar edicion de autor
+     * @param event 
+     */
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     //GETTERS Y SETTERS
