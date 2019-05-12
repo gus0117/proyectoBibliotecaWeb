@@ -8,6 +8,8 @@ package aplicacion.modelo.util;
 import aplicacion.modelo.dominio.Autor;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,8 +30,17 @@ public class ListaAutores implements Serializable{
     public ListaAutores() {
         //Se inicializan las referencias
         autores = new ArrayList<>();
-        //Se agrega un autor para prueba
-        autores.add(new Autor(1,"Edgar Alan","Poe"));
+        //Se agrega autores para prueba
+        Calendar cal = Calendar.getInstance();
+        cal.clear();
+        cal.set(1809, 1, 19);
+        Date fechaNac = cal.getTime();
+        autores.add(new Autor(1,"Edgar Alan","Poe", fechaNac));
+        
+        cal.clear();
+        cal.set(1899, 8, 24);
+        Date fechaNac2 = cal.getTime();
+        autores.add(new Autor(2,"Jorge Luis","Borges", fechaNac2));
     }
 
     /**

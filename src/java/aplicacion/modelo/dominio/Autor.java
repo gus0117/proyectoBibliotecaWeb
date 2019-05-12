@@ -6,6 +6,8 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -25,11 +27,18 @@ public class Autor implements Serializable{
      * Apellido del autor
      */
     private String apellido;
+    
+    /**
+     * Fecha de nacimiento del autor
+     */
+    private Date fechaNac;
 
     /**
      * Constructor por defecto
      */
     public Autor() {
+        //Se inicializan referencias
+        fechaNac = Calendar.getInstance().getTime();
     }
 
     /**
@@ -37,13 +46,17 @@ public class Autor implements Serializable{
      * @param id id del autor
      * @param nombre nombre del autor
      * @param apellido apellido del autor
+     * @param fechaNac fecha de nacimiento del autor
      */
-    public Autor(int id, String nombre, String apellido) {
+    public Autor(int id, String nombre, String apellido, Date fechaNac) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.fechaNac = fechaNac;
+        
     }
 
+    //METODOS ACCESORES
     /**
      * @return the id
      */
@@ -86,10 +99,58 @@ public class Autor implements Serializable{
         this.apellido = apellido;
     }
 
+    public Date getFechaNac() {
+        return fechaNac;
+    }
+
+    public void setFechaNac(Date fechaNac) {
+        this.fechaNac = fechaNac;
+    }
+
+    //METODOS PARA CONVERTIR
+    /**
+     * Convierte un objeto Autor en String
+     * @return Devuelve un Autor en formato String
+     */
     @Override
     public String toString() {
-        return "Autor{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + '}';
+        return "Autor{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNac=" + fechaNac + '}';
     }
+
+    /**
+     * Genera un codigo de objeto
+     * @return Devuelve el codigo del objeto generado
+     */
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + this.id;
+        return hash;
+    }
+
+    /**
+     * Compara un objeto con este Autor
+     * @param obj objeto a comparar
+     * @return devuelve true si son iguales y false si no lo son
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Autor other = (Autor) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
     
     
 }
