@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/Templates/principalTemplate.xhtml">
+            <ui:define name="content">
+                <p:panel header="ALTA DE LIBROS">
+                    <p:panelGrid columns="1">
+                              <p:commandButton id="btnAgregarLibro" value="Agregar Nuevo Libro"
+                              onclick="PF('NuevoLibro').show();"/>
+                        <p:dialog id="dlgNuevoLibro"
+                                  widgetVar="NuevoLibro"
+                                  modal="true"
+                                  header="Formulario para Registrar un Nuevo Libro">
+                            <h:form id="frmNuevoLibro">
+                                <p:panelGrid id="pnlNuevoAutor" columns="2">
+
+                                        <p:outputLabel id="lblIsbm" value="Isbm :"/>
+                                        <p:inputText id="txtIsbm" value="#{aMBLibrosFormBean.unLibro.isbm}"/>
+
+                                        <p:outputLabel id="lblNombre" value="Nombre :"/>
+                                        <p:inputText id="txtNombre" value="#{aMBLibrosFormBean.unLibro.nombre}"/>
+
+                                        <p:outputLabel id="lblPaginas" value="Cant. Paginas :"/>
+                                        <p:inputNumber id="txtPaginas" value="#{aMBLibrosFormBean.unLibro.paginas}"/>
+
+                                        <p:commandButton id="btnRegistrarNuevoLibro" 
+                                                         value="Registrar Libro"
+                                                         actionListener="#{aMBLibrosFormBean.guardarNuevoLibro()}"
+                                                         update="frmListaLibros"
+                                                         oncomplete="PF('NuevoLibro').hide()"/>
+                                </p:panelGrid>
+                            </h:form>
+                        </p:dialog>
+
+
+                    </p:panelGrid>
+
+                    <h:form id="frmListaLibros">
+
+                        <p:dataTable id="tablaLibros"
+                                     emptyMessage="Sin Registros"
+                                     value="#{aMBLibrosFormBean.libroBean.obtenerLibro()}"
+                                     var ="lib">
+                            <p:column headerText="Ismb">
+                                <p:outputLabel value="#{lib.isbm}"/>
+                            </p:column>
+
+                            <p:column headerText="Nombre">
+                                <p:outputLabel value="#{lib.nombre}"/>
+                            </p:column>
+
+                            <p:column headerText="Paginas">
+                                <p:outputLabel value="#{lib.paginas}"/>
+                            </p:column>
+
+                        </p:dataTable>   
+                    </h:form>   
+                </p:panel>
+            </ui:define>
+        </ui:composition>                
+    </h:body>
+</html>
+
