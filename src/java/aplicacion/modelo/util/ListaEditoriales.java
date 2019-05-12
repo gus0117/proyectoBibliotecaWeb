@@ -28,7 +28,7 @@ public class ListaEditoriales implements Serializable{
         this.editoriales = new ArrayList();
         
         //Se agrega una editorial para prueba
-        editoriales.add(new Editorial(1, "Prueba"));
+        editoriales.add(new Editorial(1, "Prueba","prueba@editorial.com"));
     }
     
     /**
@@ -36,7 +36,7 @@ public class ListaEditoriales implements Serializable{
      * @param edit nueva editorial
      */
     public void agregarEditorial(Editorial edit){
-        editoriales.add(new Editorial(edit.getCodigo(), edit.getNombre()));
+        editoriales.add(new Editorial(edit.getCodigo(), edit.getNombre(), edit.getEmail()));
     }
     
     /**

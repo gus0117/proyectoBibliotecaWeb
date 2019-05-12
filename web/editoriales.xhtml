@@ -33,6 +33,18 @@
                                     </f:facet>
                                 </p:cellEditor>
                             </p:column>
+                            <p:column headerText="Email">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputLabel id="lblEmail" value="#{edit.email}"></h:outputLabel>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText id="txtEmailEdit" value="#{edit.email}" required="true" requiredMessage="Ingresar Email" validatorMessage="Email Invalido">
+                                            <f:validator validatorId="emailValidator"/>
+                                        </p:inputText>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
                             <p:column headerText="Acciones">
                                 <p:rowEditor/>
                                 <p:commandButton id="btnBorrarEditorial" icon="ui-icon-trash" action="#{aBMEditorialFormsBean.borrarEditorial(edit)}" update=":frmEditoriales frmEditoriales:growl"></p:commandButton>
@@ -50,6 +62,10 @@
                             <p:outputLabel id="lblNuevoNombre" value="Nombre: "/>
                             <p:inputText id="txtNuevoNombre" value="#{aBMEditorialFormsBean.editorial.nombre}" required="true" requiredMessage="Ingresar Nombre de Editorial">
                                 <f:validateLength minimum="1" maximum="50"/>
+                            </p:inputText>
+                            <p:outputLabel id="lblNuevoEmail" value="Email: "/>
+                            <p:inputText id="txtNuevoEmail" value="#{aBMEditorialFormsBean.editorial.email}" required="true" requiredMessage="Ingresar Email" validatorMessage="Email Invalido">
+                                <f:validator validatorId="emailValidator"/>
                             </p:inputText>
                             <p:commandButton id="btnGuardarEditorial" value="Guardar" oncomplete="PF('altaEditorial').hide()" update=":frmEditoriales :frmEditoriales:growl">
                                 <f:actionListener binding="#{aBMEditorialFormsBean.agregarEditorial()}"/>

@@ -17,6 +17,8 @@ public class Editorial implements Serializable{
      * Nombre de la editorial
      */
     private String nombre;
+    
+    private String email;
 
     /**
      * Constructor sin parametros
@@ -28,10 +30,12 @@ public class Editorial implements Serializable{
      * Constructor con parametros (Todos los atributos)
      * @param codigo codigo de editorial
      * @param nombre nombre de la editorial
+     * @param email email de la editorial
      */
-    public Editorial(int codigo, String nombre) {
+    public Editorial(int codigo, String nombre, String email) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.email = email;
     }
 
     //Metodos accesores
@@ -50,6 +54,14 @@ public class Editorial implements Serializable{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     
