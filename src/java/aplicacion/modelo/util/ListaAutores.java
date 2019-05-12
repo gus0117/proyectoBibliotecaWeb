@@ -28,6 +28,8 @@ public class ListaAutores implements Serializable{
     public ListaAutores() {
         //Se inicializan las referencias
         autores = new ArrayList<>();
+        //Se agrega un autor para prueba
+        autores.add(new Autor(1,"Edgar Alan","Poe"));
     }
 
     /**
