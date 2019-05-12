@@ -68,6 +68,7 @@ public class ABMAutorFormBean implements Serializable{
      */
     public void iniciarAutor(){
         this.autor = new Autor();
+        System.out.println("Autor iniciado" + this.autor.toString());
     }
     
     /**
@@ -75,6 +76,7 @@ public class ABMAutorFormBean implements Serializable{
      * @return retorna una lista de autores
      */
     public List<Autor> obtenerAutores(){
+        System.out.println("cantidad autores " + autorBean.obtenerAutores().size());
         return autorBean.obtenerAutores();
     }
     

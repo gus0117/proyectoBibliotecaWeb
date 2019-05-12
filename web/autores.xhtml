@@ -8,7 +8,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <p:panel header="Alta Autores">                
+               
                 <p:dialog id="dlgNuevoAutor"
                           widgetVar="NuevoAutor"
                           modal="true"
@@ -29,7 +29,6 @@
                                              update="frmListaAutores frmListaAutores:growl"
                                              oncomplete="PF('NuevoAutor').hide()">
                                 <f:actionListener binding="#{aBMAutorFormBean.agregarAutor()}"></f:actionListener>
-                                <f:actionListener binding="#{aBMAutorFormBean.iniciarAutor()}"></f:actionListener>
                             </p:commandButton>
                         </p:panelGrid>
                     </h:form>
@@ -61,9 +60,10 @@
                 
                 <p:commandButton id="btnAgregarAutor"
                                  value="Agregar nuevo Autor"
-                                 oncomplete="PF('NuevoAutor').show()"/>
+                                 oncomplete="PF('NuevoAutor').show()"
+                                 action="#{aBMAutorFormBean.iniciarAutor()}"/>
             </h:form>
-        </p:panel>
+
     </h:body>
 </html>
 

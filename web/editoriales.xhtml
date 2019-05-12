@@ -14,7 +14,7 @@
                 <p:panel header="Gestion de Editorial">
                     <h:form id="frmEditoriales">
                         <p:growl id="growl" sticky="true" showDetail="true"></p:growl>
-                        <p:commandButton id="btnNuevaEditorial" icon="ui-icon-plus" value="Nueva Editorial" oncomplete="PF('altaEditorial').show()"></p:commandButton>
+                        <p:commandButton id="btnNuevaEditorial" icon="ui-icon-plus" value="Nueva Editorial" oncomplete="PF('altaEditorial').show()" action="#{aBMEditorialFormsBean.iniciarEditorial()}" update="dlgAltaEditorial"></p:commandButton>
                         <pre></pre>
                         <p:dataTable id="tblEditoriales" emptyMessage="Sin Registros" value="#{aBMEditorialFormsBean.obtenerEditoriales()}" var="edit" editable="true">
                             <f:facet name="header">Gestion de Editoriales</f:facet>

@@ -67,5 +67,11 @@ public class Autor implements Serializable{
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
+
+    @Override
+    public String toString() {
+        return "Autor{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + '}';
+    }
+    
     
 }
