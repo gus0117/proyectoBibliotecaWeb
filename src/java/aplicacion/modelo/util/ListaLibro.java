@@ -16,13 +16,17 @@ import java.util.List;
  */
 public class ListaLibro implements Serializable {
     
+    /**
+     * Lista de libros (Data source)
+     */
     private List<Libro> libros;
 
+    /**
+     * Constructor por defecto
+     */
     public ListaLibro() {
+        //Se inicializan las referencias
         libros = new ArrayList<>();
-        //creo un libro por defecto 
-        //Libro libro = new Libro(1,"123","Persona Normal ", 300, autor, editorial, fechaEdicion, tematica);
-        //libros.add(libro);
     }
     
     /**

@@ -51,6 +51,9 @@ private Libro unLibro;
  */
 private List<Libro> libros;
 
+/**
+ * Lista de tematicas
+ */
 private List<String> tematicas;
     
 /**
@@ -60,6 +63,7 @@ private List<String> tematicas;
        //Se inicializan referencias
        unLibro = new Libro();
        tematicas = new ArrayList();
+       //Se agregan tematicas por defecto
        tematicas.add("Drama");
        tematicas.add("Terror");
        tematicas.add("Policial");
