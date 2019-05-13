@@ -91,6 +91,23 @@ public class ListaAutores implements Serializable{
         }    
     
     }
+    
+    /**
+     * Obtiene un autor especifico segun la id
+     * @param id id del autor
+     * @return retorna un objeto Autor
+     */
+    public Autor obtenerAutor(Integer id){
+        if(id == null){
+            throw new IllegalArgumentException("no id provided");
+        }
+        for(Autor autor : autores){
+            if(id.equals(autor.getId())){
+                return autor;
+            }
+        }
+        return null;
+    }
 
     /**
      * @return the autores

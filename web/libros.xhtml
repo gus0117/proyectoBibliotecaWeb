@@ -28,11 +28,14 @@
                         <p:ajax event="rowEditCancel" listener="#{aMBLibrosFormBean.onRowEditCancel}"
                                 update="frmlListadoLibros:mensajes"/>
                         
+                        <p:column headerText="Codigo">
+                            <p:outputLabel value="#{lib.codigo}"/>
+                        </p:column>
                         <p:column headerText="Isbm">
                             <p:outputLabel value="#{lib.isbm}"/>
                         </p:column>
                         
-                        <p:column headerText="Nobmbre">
+                        <p:column headerText="Nombre">
                           <p:cellEditor>
                             <f:facet name="output">
                                 <p:outputLabel value="#{lib.nombre}"/>
@@ -51,11 +54,66 @@
                                 </f:facet>
                                 <f:facet name="input">
                                     <p:inputNumber id="numTblPaginas" value="#{lib.paginas}"
-                                           required="true"/>
+                                                   required="true" decimalPlaces="0" minValue="1"/>
                                 </f:facet>
                             </p:cellEditor>   
                         </p:column>    
                         
+                        <p:column headerText="Autor">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:outputLabel value="#{lib.autor.apellido}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{lib.autor}" converter="omnifaces.SelectItemsConverter">
+                                        <f:selectItems value="#{aMBLibrosFormBean.autorBean.obtenerAutores()}" var="aut" itemLabel="#{aut.apellido}" itemValue="#{aut}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Editorial">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:outputLabel value="#{lib.editorial.nombre}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{lib.editorial}" converter="omnifaces.SelectItemsConverter">
+                                        <f:selectItems value="#{aMBLibrosFormBean.editorialBean.obtenerEditoriales()}" var="edit" itemLabel="#{edit.nombre}" itemValue="#{edit}"/>
+                                    </p:selectOneMenu>                                    
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Fecha de Edicion">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:outputLabel value="#{lib.fechaEdicion}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </p:outputLabel>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="txtFechaEdicion" value="#{lib.fechaEdicion}" required="true" requiredMessage="Ingrese fecha de edicion">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </p:inputText>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Tematica">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputLabel value="#{lib.tematica}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu value="#{lib.tematica}">
+                                        <f:selectItem itemLabel="Seleccione Tematica" itemValue="" />
+                                        <f:selectItems value="#{aMBLibrosFormBean.tematicas}" var="tem" itemLabel="#{tem}" itemValue="#{tem}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                            
+                        </p:column>
                         <p:column headerText="Opciones">
                             <p:rowEditor/>
                             <p:commandButton icon="ui-icon-trash" value="Eliminar"
@@ -77,6 +135,8 @@
                           header="Registro De Un Nuevo Libro">
                     <h:form id="frmNuevoLibro">
                         <h:panelGrid id="tblNuevoLibro" columns="2">
+                            <p:outputLabel id="lblCodigo" value="Codigo: " for="txtCodigo"/>
+                            <p:inputNumber id="txtCodigo" value="#{aMBLibrosFormBean.unLibro.codigo}" required="true" requiredMessage="Ingrese codigo de libro" minValue="1" decimalPlaces="0" thousandSeparator=""/>
                             
                             <p:outputLabel id="lblIsbm" value="Isbm" for="txtIsbm"/>
                             <p:inputText id="txtIsbm" value="#{aMBLibrosFormBean.unLibro.isbm}"
@@ -88,8 +148,31 @@
               
                             <p:outputLabel id="lblPaginas" value="Paginas" for="numPaginas"/>
                             <p:inputNumber id="numPaginas" value="#{aMBLibrosFormBean.unLibro.paginas}"
-                                           required="true"/>
-                                
+                                           required="true" requiredMessage="Ingrese cantidad de paginas" minValue="1" decimalPlaces="0"/>
+                            <p:outputLabel id="lblAutor" value="Autor:"/>
+                            <p:selectOneMenu value="#{aMBLibrosFormBean.unLibro.autor}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItem itemLabel="Seleccione autor" itemValue="" />
+                                <f:selectItems value="#{aMBLibrosFormBean.autorBean.obtenerAutores()}" var="aut" itemLabel="#{aut.apellido}" itemValue="#{aut}"/>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel id="lblEditorial" value="Editorial:"/>
+                            <p:selectOneMenu value="#{aMBLibrosFormBean.unLibro.editorial}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItem itemLabel="Seleccione editorial" itemValue="" />
+                                <f:selectItems value="#{aMBLibrosFormBean.editorialBean.obtenerEditoriales()}" var="edit" itemLabel="#{edit.nombre}" itemValue="#{edit}"/>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel id="lblFechaEdicion" value="Fecha de Edicion" for="txtFechaEdicion"/>
+                            <p:inputText id="txtFechaEdicion" value="#{aMBLibrosFormBean.unLibro.fechaEdicion}" required="true" requiredMessage="Ingrese fecha de edicion">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </p:inputText>
+                            
+                            
+                            <p:outputLabel id="lblTematica" value="Tematica:"/>
+                            <p:selectOneMenu value="#{aMBLibrosFormBean.unLibro.tematica}">
+                                <f:selectItem itemLabel="Seleccione Tematica" itemValue="" />
+                                <f:selectItems value="#{aMBLibrosFormBean.tematicas}" var="tem" itemLabel="#{tem}" itemValue="#{tem}"/>
+                            </p:selectOneMenu>
+                            
                             <p:commandButton id="btnRegistrarNuevoLibro"
                                              value="Registar Libro"
                                              icon="ui-icon-disk"

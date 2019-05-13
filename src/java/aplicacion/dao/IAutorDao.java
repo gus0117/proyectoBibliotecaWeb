@@ -18,5 +18,5 @@ public interface IAutorDao {
     public void modificar(Autor unAutor);
     public void eliminar(Autor unAutor);
     public List<Autor>obtener();
-    
+    public Autor obtenerAutor(Integer id);
 }

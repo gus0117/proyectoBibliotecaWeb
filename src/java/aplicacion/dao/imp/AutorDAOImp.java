@@ -66,6 +66,16 @@ public class AutorDAOImp implements Serializable,IAutorDao{
     public List<Autor> obtener() {
         return listaAutores.getAutores();
     }
+
+    /**
+     * Obtiene un autor del Data Source por su codigo id
+     * @param id id del autor
+     * @return devuelve un autor
+     */
+    @Override
+    public Autor obtenerAutor(Integer id) {
+        return listaAutores.obtenerAutor(id);
+    }
     
     
 }

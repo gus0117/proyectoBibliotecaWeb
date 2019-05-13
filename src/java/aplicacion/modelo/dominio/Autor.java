@@ -18,7 +18,7 @@ public class Autor implements Serializable{
     /**
      * Id del autor
      */
-    private int id;
+    private Integer id;
     /**
      * Nombre del autor
      */
@@ -48,7 +48,7 @@ public class Autor implements Serializable{
      * @param apellido apellido del autor
      * @param fechaNac fecha de nacimiento del autor
      */
-    public Autor(int id, String nombre, String apellido, Date fechaNac) {
+    public Autor(Integer id, String nombre, String apellido, Date fechaNac) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -60,14 +60,14 @@ public class Autor implements Serializable{
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -145,7 +145,7 @@ public class Autor implements Serializable{
             return false;
         }
         final Autor other = (Autor) obj;
-        if (this.id != other.id) {
+        if (this.id.equals(other.id)) {
             return false;
         }
         return true;

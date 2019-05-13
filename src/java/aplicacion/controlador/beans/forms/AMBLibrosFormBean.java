@@ -5,9 +5,12 @@
  */
 package aplicacion.controlador.beans.forms;
 
+import aplicacion.controlador.beans.AutorBean;
+import aplicacion.controlador.beans.EditorialBean;
 import aplicacion.controlador.beans.LibroBean;
 import aplicacion.modelo.dominio.Libro;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -25,14 +28,42 @@ import org.primefaces.event.RowEditEvent;
 @ManagedBean
 @ViewScoped
 public class AMBLibrosFormBean implements Serializable{
-@ManagedProperty(value = "#{libroBean}")
 
+/**
+ * Beans Administrados
+ */
+@ManagedProperty(value = "#{libroBean}")
 private LibroBean libroBean;
+
+@ManagedProperty(value = "#{autorBean}")
+private AutorBean autorBean;
+
+@ManagedProperty(value = "#{editorialBean}")
+private EditorialBean editorialBean;
+
+/**
+ * Libro para capturar los inputs
+ */
 private Libro unLibro;
+
+/**
+ * Lista de libros para mostrar en la tabla
+ */
 private List<Libro> libros;
+
+private List<String> tematicas;
     
+/**
+ * Constructor por defecto
+ */
     public AMBLibrosFormBean() {
-       // unLibro = new Libro();
+       //Se inicializan referencias
+       unLibro = new Libro();
+       tematicas = new ArrayList();
+       tematicas.add("Drama");
+       tematicas.add("Terror");
+       tematicas.add("Policial");
+       tematicas.add("Programacion");
     }
     
     /**
@@ -132,5 +163,31 @@ private List<Libro> libros;
 
     public void setLibros(List<Libro> libros) {
         this.libros = libros;
-    }   
+    }
+
+    public AutorBean getAutorBean() {
+        return autorBean;
+    }
+
+    public void setAutorBean(AutorBean autorBean) {
+        this.autorBean = autorBean;
+    }
+
+    public EditorialBean getEditorialBean() {
+        return editorialBean;
+    }
+
+    public void setEditorialBean(EditorialBean editorialBean) {
+        this.editorialBean = editorialBean;
+    }
+
+    public List<String> getTematicas() {
+        return tematicas;
+    }
+
+    public void setTematicas(List<String> tematicas) {
+        this.tematicas = tematicas;
+    }
+    
+    
 }

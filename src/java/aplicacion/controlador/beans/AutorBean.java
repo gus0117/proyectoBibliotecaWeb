@@ -78,4 +78,13 @@ public class AutorBean {
     public List<Autor> obtenerAutores(){
        return autordao.obtener();
     }
+    
+    /**
+     * Obtiene un autor por su id
+     * @param id id del autor
+     * @return devuelve un autor especifico
+     */
+    public Autor obtenerAutor(Integer id){
+        return autordao.obtenerAutor(id);
+    }
 }

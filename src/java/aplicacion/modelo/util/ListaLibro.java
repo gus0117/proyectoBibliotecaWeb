@@ -21,8 +21,8 @@ public class ListaLibro implements Serializable {
     public ListaLibro() {
         libros = new ArrayList<>();
         //creo un libro por defecto 
-        Libro libro = new Libro("123","Persona Normal ",300);
-        libros.add(libro);
+        //Libro libro = new Libro(1,"123","Persona Normal ", 300, autor, editorial, fechaEdicion, tematica);
+        //libros.add(libro);
     }
     
     /**
@@ -31,11 +31,14 @@ public class ListaLibro implements Serializable {
      */
     public void agregarLibro(Libro unLibro){
     Libro libroaux = new Libro();
-    
+    libroaux.setCodigo(unLibro.getCodigo());
     libroaux.setIsbm(unLibro.getIsbm());
     libroaux.setNombre(unLibro.getNombre());
     libroaux.setPaginas(unLibro.getPaginas());
-    
+    libroaux.setAutor(unLibro.getAutor());
+    libroaux.setEditorial(unLibro.getEditorial());
+    libroaux.setFechaEdicion(unLibro.getFechaEdicion());
+    libroaux.setTematica(unLibro.getTematica());
     libros.add(libroaux);
     }
     
